@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LightRays from '../components/LightRays';
 import { Schibsted_Grotesk, Martian_Mono } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
 
 const schibstedGrotesk = Schibsted_Grotesk({
   variable: "--font-schibsted-grotesk",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
         <body>
+        <NavBar />
         <div className="absolute inset-0 top-0 z-[-1] min-h-screen">
             <LightRays
                 raysColor="#5dfeca"
