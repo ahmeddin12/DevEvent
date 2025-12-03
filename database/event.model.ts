@@ -141,13 +141,13 @@ function generateSlug(title: string): string {
 }
 
 // Helper function to normalize date to ISO format
-function normalizeDate(dateString: string): string {
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) {
-        throw new Error('Invalid date format');
+function normalizeDate(dateString: string): string {const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateString.trim());
+        if (!match) {
+         throw new Error('Invalid date format. Use YYYY-MM-DD');
+         }
+   const [, year, month, day] = match;
+        return `${year}-${month}-${day}`;
     }
-    return date.toISOString().split('T')[0]; // Return YYYY-MM-DD format
-}
 
 // Helper function to normalize time format
 function normalizeTime(timeString: string): string {
