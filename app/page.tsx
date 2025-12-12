@@ -2,21 +2,14 @@ import ExploreBtn from "@/components/ExploreBtn";
 import EventCard from "@/components/EventCard";
 import { IEvent } from "@/database";
 import { cacheLife } from "next/cache";
-
-function getBaseUrl() {
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
-  return "http://localhost:3000";
-}
+import { getAllEvents } from "@/lib/actions/event.actions";
 
 const Page = async () => {
   "use cache";
   cacheLife("hours");
-  const base = getBaseUrl();
-  const response = await fetch(new URL("/api/events", base).toString(), {
-    next: { revalidate: 3600 },
-  });
-  const { events } = await response.json();
+  // Fetch events directly from the DB (server-side) to avoid HTTP calls
+  // during prerender which can return HTML error pages.
+  const events: IEvent[] = await getAllEvents();
 
   return (
     <section>
