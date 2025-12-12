@@ -1,22 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    typescript: {
-        ignoreBuildErrors: true,
-    },
-    cacheComponents: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  cacheComponents: true,
   /* config options here */
-    experimental: {
-        cacheComponents: true,
-    },
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'res.cloudinary.com',
-            }
-        ]
-    },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
+  },
   async rewrites() {
     return [
       {
