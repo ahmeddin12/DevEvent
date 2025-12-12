@@ -32,6 +32,8 @@ const EventSchema = new Schema<IEvent>(
       type: String,
       lowercase: true,
       trim: true,
+      unique: true,
+      index: true,
     },
     description: {
       type: String,
@@ -181,8 +183,7 @@ function normalizeTime(timeString: string): string {
   return `${hours.toString().padStart(2, "0")}:${minutes}`;
 }
 
-// Create unique index on slug for better performance
-EventSchema.index({ slug: 1 }, { unique: true });
+// Note: `unique` and `index` are declared on the `slug` field above
 
 // Create compound index for common queries
 EventSchema.index({ date: 1, mode: 1 });
