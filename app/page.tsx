@@ -1,12 +1,10 @@
 import ExploreBtn from "@/components/ExploreBtn";
 import EventCard from "@/components/EventCard";
 import { IEvent } from "@/database";
-import { cacheLife } from "next/cache";
 import { getAllEvents } from "@/lib/actions/event.actions";
 
 const Page = async () => {
   "use cache";
-  cacheLife("hours");
   // Fetch events directly from the DB (server-side) to avoid HTTP calls
   // during prerender which can return HTML error pages.
   const events: IEvent[] = await getAllEvents();
